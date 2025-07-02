@@ -26,10 +26,13 @@ public class UserController {
     }
 
     @PutMapping("/status/{id}")
-    public User updateStatus(@PathVariable Long id, @RequestBody Map<String, String> payload) {
-        LocationStatus status = LocationStatus.valueOf(payload.get("status"));
-        return service.updateStatus(id, status);
-    }
+public User updateStatus(@PathVariable Long id, @RequestBody Map<String, String> payload) {
+    User user = userRepository.findById(id).orElseThrow();
+    user.setStatus(LocationStatus.valueOf(payload.get("status")));
+    user.setCity(payload.getOrDefault("city", "Gaya"));
+    return userRepository.save(user);
+}
+
 
     @GetMapping("/users")
     public List<User> getUsers() {
