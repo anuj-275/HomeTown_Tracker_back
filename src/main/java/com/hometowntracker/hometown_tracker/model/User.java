@@ -21,6 +21,16 @@ public class User {
     private LocationStatus status;
 
     private String groupCode;
+    private String city = "Gaya"; // Default to Gaya
+
+public String getCity() {
+    return city;
+}
+
+public void setCity(String city) {
+    this.city = city;
+}
+
 
     // 👉 Required: No-argument constructor
     public User() {
