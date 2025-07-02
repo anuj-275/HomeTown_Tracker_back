@@ -29,9 +29,11 @@ public class UserService {
         return repo.findAll();
     }
 
-    public User updateStatus(Long id, LocationStatus status) {
-        User user = repo.findById(id).orElseThrow();
+    public User updateStatus(Long id, String statusStr, String city) {
+        User user = repo.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        LocationStatus status = LocationStatus.valueOf(statusStr);
         user.setStatus(status);
+        user.setCity(city);
         return repo.save(user);
     }
 
